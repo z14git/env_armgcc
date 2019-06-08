@@ -22,7 +22,3 @@ RUN pip install numpy pyserial==2.7 pyusb==1.0.0b2 Pillow
 RUN apt-get -y install git
 
 RUN git clone --recursive https://github.com/openmv/openmv.git
-RUN cd openmv/udev
-RUN cp 50-openmv.rules /etc/udev/rules.d/
-RUN udevadm control --reload-rules
-RUN adduser root dialout
