@@ -7,8 +7,10 @@ ENV AUTHOR z14git
 WORKDIR /
 RUN sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list
 
-RUN apt-get -y remove gcc-arm-none-eabi
+RUN apt-get update
+RUN apt-get remove gcc-arm-none-eabi
 RUN apt-get autoremove
+RUN apt-get -y install software-properties-common
 RUN add-apt-repository -y ppa:team-gcc-arm-embedded/ppa
 RUN apt-get update
 RUN apt-get -y install gcc-arm-embedded
