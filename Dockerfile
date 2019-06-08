@@ -4,7 +4,7 @@ FROM ubuntu:18.04
 ENV AUTHOR z14git
 
 # Modify apt-get to aliyun mirror
-WORKDIR /
+WORKDIR /repos
 RUN sed -i 's/archive.ubuntu/mirrors.aliyun/g' /etc/apt/sources.list
 
 RUN apt-get update
@@ -21,3 +21,8 @@ RUN apt-get -y install python-gtksourceview2
 RUN pip install numpy pyserial==2.7 pyusb==1.0.0b2 Pillow
 RUN apt-get -y install git
 
+RUN git clone --recursive https://github.com/openmv/openmv.git
+RUN cd openmv/udev
+RUN cp 50-openmv.rules /etc/udev/rules.d/
+RUN udevadm control --reload-rules
+RUN adduser root dialout
